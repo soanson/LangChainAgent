@@ -1,0 +1,11 @@
+
+Mobile ALOHA： 斯坦福大学团队发布全能家政机器人
+https://www.bilibili.com/video/BV1g64y1J77Y
+
+
+项目网站：
+https://mobile-aloha.github.io/
+https://mobile-aloha.github.io/cn.html
+
+斯坦福大学团队：Zipeng Fu*、Tony Z.Zhao* 和 Chelsea Finn
+（*视频中的机器人是远程操作的。有关自主机器人技能，详见项目网站。）

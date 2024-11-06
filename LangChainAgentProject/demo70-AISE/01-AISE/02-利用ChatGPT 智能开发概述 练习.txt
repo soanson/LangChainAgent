@@ -1,0 +1,87 @@
+ChatGPT 生成相关开发文档
+http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
+
+
+
+1：请帮我生成软件需求说明书模板，返回Markdown格式
+
+
+2：你是一位资深的需求分析工程师，请你帮我生成MF京东电子商城软件需求说明书
+
+
+3: 你是一位资深的需求分析工程师，，根据你输出的MF京东电子商城软件需求说明书，请你详细说明产品前景和用户特征部分。
+
+你是一位资深的需求分析工程师，，根据你输出的MF京东电子商城软件需求说明书，请你详细说明用户注册与登录和商品浏览与搜索。
+
+案例分析：
+张小峰是新东方在线课程的产品经理，他需要深入分析市场上的各大竞品国内的新东方在线，学而思网校，网易云课堂，国外的Coursera，
+Udacity和Udemy，明确自身产品的定位和差异化方向。因此使用chatGPT进行竞品分析。
+
+3：请帮我搜索并整理中国国内的新东方在线，学而思网校，网易云课堂，国外的Khan Academy，Coursera和Udemy这几家公司的基本信息，包括创立背景，
+产品与服务，业务模式等。同时也包括这些公司最近的新闻报道，我需要全面了解它们的情况。
+
+4：非常感谢，你提供的这些基本信息。这为我后续的竞品分析提供帮助。我会在分析中继续与你探讨，帮助我厘清不同竞品的定位与优劣势。
+
+5：现在我需要从定位、功能、课程配置和盈利模式四个维度深入分析新东方在线，学而思网校，网易云课堂，Coursera、Khan Academy和Udemy这几家公司，找出它们之间的主要差异点。可以帮我在这四个维度进行探讨并总结各竞品的优劣势吗?
+
+
+6：非常感谢，你提供的这些基本信息。这为我后续的竞品分析提供帮助。我会在分析中继续与你探讨，帮助我厘清不同竞品的定位与优劣势。
+我是新东方在线学习App产品经理。我们刚刚上线了AI学习助手，
+它不会像chatgpt一样直接给出答案，代写论文，而是会像私人导师，根据每个孩子，每位终身学习者的水平、进度、偏好，给他们提供个性化、一对一、24小时沉浸式的指导。还可以给老师、家长提供丰富的备课、辅导指南。
+我想通过用户访谈，请分为3类，教师，家长和学生，获得一些反馈信息，帮我分别设计问题提纲。
+
+
+
+4:  以下是一个图书管理系统，请帮我使用PlantUML语言绘制分层软件架构设计图。
+以下是功能需求文档
+"""
+1. 用户管理功能
+   - 注册新用户：用户可以通过系统注册新账号。
+   - 登录：已注册的用户可以通过账号和密码登录系统。
+   - 修改个人信息：用户可以修改自己的个人信息，如用户名、密码、联系方式等。
+   - 删除用户：管理员可以删除系统中的用户账号。
+
+2. 图书管理功能
+   - 添加图书：管理员可以添加新的图书到系统中，包括图书名称、作者、出版社、ISBN号、分类等信息。
+   - 编辑图书信息：管理员可以修改已存在图书的信息。
+   - 删除图书：管理员可以从系统中删除图书。
+   - 搜索图书：用户可以根据图书名称、作者、ISBN号等关键字进行图书搜索。
+   - 借阅图书：用户可以借阅系统中的图书，借阅后图书状态变为借出，并记录借阅时间和借阅者信息。
+   - 归还图书：用户可以归还已借阅的图书，归还后图书状态变为可借阅，并记录归还时间。
+
+3. 图书借阅管理功能
+   - 借阅记录查询：用户和管理员可以查询自己的借阅记录，包括借阅时间、归还时间等信息。
+   - 逾期提醒：系统可以自动提醒用户还书日期已过，需要尽快归还图书。
+   - 罚款管理：系统可以根据逾期时间自动计算罚款金额，并提醒用户缴纳罚款。
+
+4. 系统管理功能
+   - 用户权限管理：管理员可以设置用户的权限，包括普通用户和管理员两种角色。
+   - 数据备份与恢复：管理员可以对系统数据进行备份，并在需要时进行恢复操作。
+   - 系统日志记录：系统可以记录用户的操作日志，包括登录、添加图书、借阅图书等操作。
+"""
+
+5：请你设计博客项目 系统的类，以及类之间的关系，请以列表形式显示
+请你设计博客项目 系统的类，以及类之间的关系，类的属性和方法。请使用PlantUML语言绘制类关系图。
+
+6：请你设计博客项目 系统的类，以及类之间的关系，类的属性和方法，以及每个方法的参数形式，返回值，请以列表形式显示
+
+
+7：你是一位java资深开发工程师，请你完成一个冒泡排序函数，给我完整的代码，并且加上注释 
+
+8：你是一位java资深开发工程师，请你在每行代码上一行，增加英语注释 
+'''
+public boolean wrongAnswer(){
+		System.out.println("Question was incorrectly answered");
+		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
+		inPenaltyBox[currentPlayer] = true;
+		
+		currentPlayer++;
+		if (currentPlayer == players.size()) currentPlayer = 0;
+		return true;
+	}
+...
+
+9：请抓取网页并提取数据 (https://www.scrapethissite.com/pages/simple/) 。 具体来说，提取国家、首都、人口和面积 (km2) 信息。 以表格形式组织抓取的数据。 输出应仅包含表格。
+
+
+10：Create a table customer with the following fields id, name, age, national id, gender.occupation, created on, created by that has one to many relationship with an addresstable where the foreign key in the address table is the customer id that references thecustomer table. The customer table should also have a one to many relationship with anorders table where the orders table has fields id, created on, created by, quantity,product code, price, and the foreign key of the orders table is customer id

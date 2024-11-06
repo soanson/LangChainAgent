@@ -1,0 +1,353 @@
+
+
+需求描述：
+
+该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），分别作为输入日期的月份、日、年份，通过程序可以输出该输出日期在日历上下一天的日期。假定年2001≤ year ≤2050，（2001年1月1号 到2050年12月31号）
+
+函数描述如下：
+String nextDate(int year,int month,int day)
+1：输入参数为3个整数，分别代表 年，月，日
+2：返回参数为字符串
+
+
+例如，
+1：输入为2014年5月1日，则该程序的输出为2014年5月2日。返回：“2014/5/2”
+2：输入为2014年12月31日，则该程序的输出为2014年12月31日。返回：“2015/1/1”
+
+思考：异常输入，完成对参数的校验
+
+
+
+
+作业：
+
+思考提示词如何编写更加实现该功能和异常情况
+1：完成该函数的实现 （使用任何一种语言）
+
+你是一位资深Java工程师。输出函数实现代码
+###
+该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），
+分别作为输入日期的月份、日、年份，通过程序可以输出该输出日期在日历上下一天的日期。假定年2001≤ year ≤2050
+（2001年1月1号 到2050年12月31号）
+
+函数描述如下：
+String nextDate(int year,int month,int day)
+1：输入参数为3个整数，分别代表 年，月，日
+2：返回参数为字符串
+
+
+例如，
+1：输入为2014年5月1日，则该程序的输出为2014年5月2日。返回：“2014/5/2”
+2：输入为2014年12月31日，则该程序的输出为2014年12月31日。返回：“2015/1/1”
+
+###
+请不需使用java系统函数，或者os函数，请自己实现函数的业务逻辑
+注意事项1： 请你对输入参数的校验功能，是输入参数必须合法，否则抛出异常。 分别对年，月，日检验
+
+2：
+请根据给定的函数，设计测试用例。然后输出表格模式。
+表格列如下：
+序号   测试用例说明/目的   测试输入数据  预期输出
+
+业务需求
+###
+该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），
+分别作为输入日期的月份、日、年份，通过程序可以输出该输出日期在日历上的下一天的日期。假定年2001≤ year ≤2050
+（2001年1月1号 到2050年12月31号）
+
+函数描述如下：
+String nextDate(int year,int month,int day)
+1：输入参数为3个整数，分别代表 年，月，日
+2：返回参数为字符串
+
+
+例如，
+1：输入为2014年5月1日，则该程序的输出为2014年5月2日。返回：“2014/5/2”
+2：输入为2014年12月31日，则该程序的输出为2014年5月1日。返回：“2015/1/1”
+###
+测试用例要求：
+1. 测试用例应覆盖函数的所有可能的输入情况，包括空输入、非空输入等。
+2. 测试用例应包含预期的输出结果，并验证其是否符合函数原型的要求。
+3. 测试用例应具有可重复性，以便于后续的性能优化和错误排查。
+4. 测试用例应简洁明了，易于理解和执行。
+
+
+3：完成单元测试 （路径实现全覆盖 100%语句覆盖， 并且考虑各种异常情况）
+
+A：参考提示词：
+请为这个函数写一个单元测试，并给出提示词。
+
+
+你是一位资深Java工程师。请针对以下函数进行编写单元测试，确保它能够正确实现需求。基于Junit5输出代码。
+路径实现全覆盖 100%语句覆盖， 并且考虑各种异常情况
+需求描述
+###
+该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），
+分别作为输入日期的月份、日、年份，通过程序可以输出该输出日期在日历上下一天的日期。假定年2001≤ year ≤2050
+（2001年1月1号 到2050年12月31号）
+
+函数描述如下：
+String nextDate(int year,int month,int day)
+1：输入参数为3个整数，分别代表 年，月，日
+2：返回参数为字符串
+
+
+例如，
+1：输入为2014年5月1日，则该程序的输出为2014年5月2日。返回：“2014/5/2”
+2：输入为2014年12月31日，则该程序的输出为2014年12月31日。返回：“2015/1/1”
+
+###
+
+函数原型：
+###
+（此处应给出函数的原型，包括输入参数、返回值等）
+【
+public class CalendarUtils {
+
+    public static String nextDate(int year, int month, int day) {
+        // 判断是否为闰年
+        boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        // 每个月的天数，注意二月需要根据闰年调整
+        int[] daysInMonth = isLeapYear ? 
+                new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31} : 
+                new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        // 检查日期是否有效
+        if (year < 2001 || year > 2050 || month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
+            throw new IllegalArgumentException("Invalid date");
+        }
+
+        // 计算下一天的日期
+        day += 1;
+        if (day > daysInMonth[month - 1]) {
+            day = 1;
+            month += 1;
+            if (month > 12) {
+                month = 1;
+                year += 1;
+            }
+        }
+
+        // 格式化输出
+        return String.format("%d/%d/%d", year, month, day);
+    }
+
+}
+
+】
+
+请参考测试用例
+###
+序号	测试用例说明/目的	测试输入数据	预期输出
+1	常规情况测试	2014, 5, 1	2014/5/2
+2	月末测试	2014, 5, 31	2014/6/1
+3	年末测试	2014, 12, 31	2015/1/1
+4	2月非闰年测试	2014, 2, 28	2014/3/1
+5	2月闰年测试	2016, 2, 29	2016/3/1
+6	1月1日测试	2014, 1, 1	2014/1/2
+7	12月31日测试	2014, 12, 31	2015/1/1
+8	边界年份测试	2001, 1, 1	2001/1/2
+9	边界年份测试	2050, 12, 31	2051/1/1
+10	无效年份测试	2000, 1, 1	抛出异常
+11	无效月份测试	2014, 0, 1	抛出异常
+12	无效月份测试	2014, 13, 1	抛出异常
+13	无效日测试	2014, 1, 0	抛出异常
+14	无效日测试	2014, 1, 32	抛出异常
+15	2月非闰年无效日测试	2014, 2, 29	抛出异常
+###
+
+测试要求：
+1. 测试该函数在不同输入参数下的正确性。
+2. 测试该函数在返回值方面的正确性。
+3. 测试该函数在异常处理方面的正确性。
+
+
+
+请确保测试用例清晰、具体，并给出相应的提示词。
+
+4：代码审查
+你是一位资深java编程专家，负责代码变更的审查工作。需要给出审查建议。
+在建议的开始需明确对此代码变更给出「拒绝」或「接受」的决定，
+
+并且以格式「变更评分：实际的分数」给变更打分，分数区间为0~100分。
+
+然后，以精炼的语言、严厉的语气指出存在的问题。如果你觉得必要的情况下，可直接给出修改后的内容。
+建议中的语句可以使用emoji结尾。你的反馈内容必须使用严谨的markdown格式。
+
+评审代码主要从以下方面考虑：
+1:代码目标：  "这段代码的目标是什么？请帮我检查是否达到了预期的功能和效果。"
+2:. 可读性和可维护性：   "请评估代码的可读性和可维护性。是否有任何命名问题、代码结构混乱或缺乏注释的情况？"
+3. 错误处理： "请检查代码是否正确处理了可能出现的错误和异常情况。是否有任何潜在的错误漏洞或边界情况未被考虑？"
+4. 性能优化： "请评估代码的性能。是否有任何潜在的性能瓶颈或低效的操作？是否有任何优化的机会？"
+5. 安全性："请检查代码是否存在任何潜在的安全漏洞或不安全的实践。是否有任何需要加强的安全措施？"
+6. 最佳实践： "请评估代码是否符合最佳实践和编码规范。是否有任何不推荐的用法或需要改进的地方？"
+7. 代码重复："请评估代码是否存在重复的部分。是否有任何机会将重复的代码提取为可重用的函数或模块？"
+8. 总结和建议："请总结你对代码的整体评价，并提供任何改进的建议或建议的下一步行动。"
+
+函数实现需求描述
+###
+该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），
+分别作为输入日期的月份、日、年份，通过程序可以输出该输出日期在日历上下一天的日期。假定年2001≤ year ≤2050
+（2001年1月1号 到2050年12月31号）
+
+函数描述如下：
+String nextDate(int year,int month,int day)
+1：输入参数为3个整数，分别代表 年，月，日
+2：返回参数为字符串
+
+
+例如，
+1：输入为2014年5月1日，则该程序的输出为2014年5月2日。返回：“2014/5/2”
+2：输入为2014年12月31日，则该程序的输出为2014年12月31日。返回：“2015/1/1”
+
+###
+
+
+需要评审的代码
+###
+public class CalendarUtils {
+
+    public static String nextDate(int year, int month, int day) {
+        // 判断是否为闰年
+        boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        // 每个月的天数，注意二月需要根据闰年调整
+        int[] daysInMonth = isLeapYear ? 
+                new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31} : 
+                new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        // 检查日期是否有效
+        if (year < 2001 || year > 2050 || month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
+            throw new IllegalArgumentException("Invalid date");
+        }
+
+        // 计算下一天的日期
+        day += 1;
+        if (day > daysInMonth[month - 1]) {
+            day = 1;
+            month += 1;
+            if (month > 12) {
+                month = 1;
+                year += 1;
+            }
+        }
+
+        // 格式化输出
+        return String.format("%d/%d/%d", year, month, day);
+    }
+
+    public static void main(String[] args) {
+        // 测试函数
+        System.out.println(nextDate(2014, 5, 1));  // 输出: 2014/5/2
+        System.out.println(nextDate(2014, 12, 31)); // 输出: 2015/1/1
+    }
+}
+
+###
+
+
+5：单元测试代码审查
+4：单元测试代码审查
+你是一位资深java编程专家，负责单元测试的审查工作。需要给出审查建议。
+在建议的开始需明确对此代码变更给出「拒绝」或「接受」的决定，
+并且以格式「变更评分：实际的分数」给变更打分，分数区间为0~100分。
+
+然后，以精炼的语言、严厉的语气指出存在的问题。如果你觉得必要的情况下，可直接给出修改后的内容。
+建议中的语句可以使用emoji结尾。你的反馈内容必须使用严谨的markdown格式。
+
+评审代码主要从以下方面考虑：
+1.独立性(Independence):每个单元测试应该彼此独立，互相独立而不受其他测试结果的影响,
+2.可重复性(Repeatable):每次运行测试都应该得到相同的结果，以便于调试和确定问题.
+3.可读性(Readable):测试代码应该易于阅读和理解，这对于团队合作和维护至关重要。
+4.可维护性(Maintainable):测试代码应该易于维护和修改，以便应对需求变化和修复bug。
+5.完整性(Completeness):单元测试应该覆盖被测代码的所有关键路径+、边缘情况和异常情况。
+6.精确性(Accuracy):测试结果应该符合预期，并正确地检测出潜在的问题或错误。
+7.直观性(Intuitiveness):测试代码应该简洁明了，易于理解其意图和目的。
+8.高效性(Efficiency):单元测试应该运行速度快、资源消耗低，以便集成到持续集成
+9.自动化(Automation):测试应该能够自动运行，以便反复执行和集成到自动化测试环境中。
+10.可追溯性(Traceability):测试代码应该与被测代码存在明确的关联和对应关系，以方便跟踪和管理。
+需要评审的单元测试代码
+###
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+public class CalendarUtilsTest {
+
+    @Test
+    public void testRegularDate() {
+        assertEquals("2014/5/2", CalendarUtils.nextDate(2014, 5, 1));
+    }
+
+    @Test
+    public void testEndOfMonth() {
+        assertEquals("2014/6/1", CalendarUtils.nextDate(2014, 5, 31));
+    }
+
+    @Test
+    public void testEndOfYear() {
+        assertEquals("2015/1/1", CalendarUtils.nextDate(2014, 12, 31));
+    }
+
+    @Test
+    public void testFebruaryNonLeapYear() {
+        assertEquals("2014/3/1", CalendarUtils.nextDate(2014, 2, 28));
+    }
+
+    @Test
+    public void testFebruaryLeapYear() {
+        assertEquals("2016/3/1", CalendarUtils.nextDate(2016, 2, 29));
+    }
+
+    @Test
+    public void testStartOfYear() {
+        assertEquals("2014/1/2", CalendarUtils.nextDate(2014, 1, 1));
+    }
+
+    @Test
+    public void testEndOfYearBoundary() {
+        assertEquals("2015/1/1", CalendarUtils.nextDate(2014, 12, 31));
+    }
+
+    @Test
+    public void testBoundaryYearStart() {
+        assertEquals("2001/1/2", CalendarUtils.nextDate(2001, 1, 1));
+    }
+
+    @Test
+    public void testBoundaryYearEnd() {
+        assertEquals("2051/1/1", CalendarUtils.nextDate(2050, 12, 31));
+    }
+
+    @Test
+    public void testInvalidYearBelow() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2000, 1, 1));
+    }
+
+    @Test
+    public void testInvalidMonthBelow() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2014, 0, 1));
+    }
+
+    @Test
+    public void testInvalidMonthAbove() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2014, 13, 1));
+    }
+
+    @Test
+    public void testInvalidDayBelow() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2014, 1, 0));
+    }
+
+    @Test
+    public void testInvalidDayAbove() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2014, 1, 32));
+    }
+
+    @Test
+    public void testInvalidFebruaryDayNonLeapYear() {
+        assertThrows(IllegalArgumentException.class, () -> CalendarUtils.nextDate(2014, 2, 29));
+    }
+}
+
+###

@@ -1,0 +1,36 @@
+Plan-and-Execute
+
+背景
+在过去的一年里，语言模型驱动的代理和状态机作为创建灵活且有效的AI产品的设计模式，展现了巨大潜力。
+
+代理的核心在于将LLMs用作通用问题解决器，连接它们与外部资源以回答问题或完成任务。
+
+LLM代理通常有以下主要步骤：
+
+Propose action 提议行动：LLM生成文本，直接响应用户或传递给一个函数。
+Execute action执行行动：你的代码调用其他软件以执行诸如查询数据库或调用API的任务。
+Observe 观察：通过调用另一个函数或响应用户来对工具调用的响应进行反应。
+ReAct (可能存在循环和迭代)代理是这一模式的典型设计，它通过重复的思考、行动、观察循环提示语言模型：
+
+思考：我应该调用Search()来查看比赛的当前比分。
+行动：Search("比赛X的当前比分是多少？")
+观察：当前比分是24-21 ...（重复N次） 一个典型的ReAct风格代理轨迹。
+Thought: I should call Search() to see the current score of the game.
+Act: Search("What is the current score of game X?")
+Observation: The current score is 24-21
+... (repeat N times)
+这种方法利用了 Chain-of-Thought 链式思考提示，每一步只做一个行动选择。虽然这对简单任务可能有效，但也有几个主要缺点：
+
+它需要在每次工具调用时进行LLM调用。
+LLM只为一个子问题进行规划。这可能导致次优轨迹，因为它不被迫对整个任务进行“推理”。
+通过明确的规划步骤可以克服这两个缺点。下面是我们在LangGraph中实现的两种设计。
+
+1，计划与执行 （Plan-and-Solve/BabyAGI）
+
+这个简单的架构大致基于Wang等人的 Plan-and-Solve Prompting 计划与解决提示的论文，以及Yohei Nakajima的 BabyAGI 项目，代表了规划代理架构。它包括两个基本组件：
+
+Planner 规划器，提示LLM生成一个多步骤计划以完成一个大任务。
+Executor 执行器，接受用户查询和计划中的一个步骤，并调用一个或多个工具来完成该任务。
+一旦执行完成，代理将再次调用一个重新规划提示，让它决定是否用一个响应完成，或者是否生成一个后续计划（如果第一个计划没有达到预期效果）。
+
+这种代理设计使我们不必为每次工具调用都调用大的规划器LLM。它仍然受限于串行工具调用，并且每个任务都使用一个LLM，因为它不支持变量赋值。It still is restricted by serial tool calling and uses an LLM for each task since it doesn't support variable assignment.

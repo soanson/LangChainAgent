@@ -1,0 +1,62 @@
+
+03-修复bug
+
+
+你是一位java语言资深开发工程师，请你先理解代码。然后寻找bug，并且给我们解释bug的原因，并且修复bug，
+显示修改后的代码
+...
+public void add(Object element) {
+		if (!readOnly) {
+			int newSize = size + 1;
+			if (newSize > elements.length) {
+				Object[] newElements = new Object[elements.length + 10];
+				for (int i = 0; i < size; i++)
+					newElements[i] = elements[i];
+				elements = newElements;
+			}
+			elements[++size] = element;
+		}
+	}
+...
+
+
+
+
+你是一位c语言资深开发工程师，请你先理解代码。然后寻找bug，并且给我们解释bug的原因，并且修复bug，
+显示修改后的代码
+...
+ strcpy( char * t, char * s ) {
+   while ( *++t = *++s );
+}
+...
+
+你是一位c语言资深开发工程师，请你先理解代码。然后寻找bug，并且给我们解释bug的原因，并且修复bug，
+显示修改后的代码
+...
+strcpy( char * t, char * s ) {
+   do {
+      ++t;
+      ++s;
+      *t = *s;
+   }while ( *t != '\0' );
+}
+...
+
+你是一位c语言资深开发工程师，请你先理解代码。然后寻找bug，并且给我们解释bug的原因，并且修复bug，
+显示修改后的代码
+...
+
+strcpy( char * t, char * s ) {
+   do {
+      ++t;
+      ++s;
+      *t = *s;
+   }while ( *t != '\0' );
+}
+
+
+ strcpy( char * t, char * s ) {
+   while ( *++t = *++s );
+}
+
+...

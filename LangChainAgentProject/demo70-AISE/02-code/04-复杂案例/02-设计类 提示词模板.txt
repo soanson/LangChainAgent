@@ -1,0 +1,158 @@
+
+
+为了帮助大模型完成系统设计，主要包括设计类、定义接口和类协作，可以使用一个详细的提示词模板。以下是一个详细的提示词模板，方便设计师以后使用。
+
+提示词模板
+1. 任务描述
+描述你希望大模型完成的任务，例如设计一个系统的类、定义接口和类协作。
+2. 系统模块功能
+提供系统模块的功能描述，详细说明每个模块的职责和预期行为。
+3. 类的设计
+列出系统中的主要类及其职责。
+描述每个类的属性和方法，包括它们的类型和功能。
+4. 接口定义
+列出系统中的主要接口，描述每个接口的方法、参数和返回值。
+说明哪些类将实现这些接口以及实现的具体细节。
+5. 类协作
+描述类之间的协作方式，包括类之间的关系（如继承、聚合、组合等）。
+详细说明类如何交互来完成系统功能。
+6. 设计模式
+指定需要遵循的设计模式（如单例模式、工厂模式、观察者模式等）。
+7. 示例
+提供类和接口的使用示例，展示如何实例化类、调用方法和实现接口。
+
+
+
+
+##########################################################
+
+1. 任务描述：
+   请设计一个订单处理系统，包括设计类、定义接口和类协作。
+
+2. 系统模块功能：
+   订单处理系统包括以下模块：
+   - 订单管理：创建、更新和删除订单
+   - 支付处理：处理订单支付
+   - 客户管理：管理客户信息
+   - 库存管理：管理库存信息
+
+3. 类的设计：
+   - Order 类：表示订单
+     - 属性：order_id (字符串)，customer_id (字符串)，order_items (列表)，status (字符串)，created_at (日期时间)，paid_at (日期时间)
+     - 方法：add_item(self, item_id, quantity, price)，calculate_total(self)，process_payment(self, payment_method)，get_order_summary(self)
+   
+   - Customer 类：表示客户
+     - 属性：customer_id (字符串)，name (字符串)，email (字符串)
+     - 方法：get_customer_info(self)，update_customer_info(self, name, email)
+   
+   - Inventory 类：表示库存
+     - 属性：item_id (字符串)，name (字符串)，quantity (整数)，price (浮点数)
+     - 方法：check_stock(self, item_id)，update_stock(self, item_id, quantity)
+
+4. 接口定义：
+   - PaymentProcessor 接口：定义支付处理方法
+     - 方法：process_payment(self, order_id, amount)
+
+5. 类协作：
+   - Order 类与 Customer 类和 Inventory 类交互，通过客户 ID 获取客户信息，通过 Inventory 类检查库存和更新库存。
+   - Order 类实现 PaymentProcessor 接口，用于处理订单支付。
+
+6. 设计模式：
+   - 使用工厂模式创建订单实例
+   - 使用策略模式处理不同的支付方式
+
+7. 示例：
+   ```python
+   from datetime import datetime
+
+   # Order 类
+   class Order:
+       def __init__(self, order_id, customer_id):
+           self.order_id = order_id
+           self.customer_id = customer_id
+           self.order_items = []
+           self.status = 'pending'
+           self.created_at = datetime.now()
+           self.paid_at = None
+
+       def add_item(self, item_id, quantity, price):
+           self.order_items.append({'item_id': item_id, 'quantity': quantity, 'price': price})
+
+       def calculate_total(self):
+           return sum(item['quantity'] * item['price'] for item in self.order_items)
+
+       def process_payment(self, payment_method):
+           # 假设支付处理逻辑在这里
+           self.status = 'paid'
+           self.paid_at = datetime.now()
+
+       def get_order_summary(self):
+           total = self.calculate_total()
+           return {
+               'order_id': self.order_id,
+               'customer_id': self.customer_id,
+               'order_items': self.order_items,
+               'total': total,
+               'status': self.status,
+               'created_at': self.created_at,
+               'paid_at': self.paid_at
+           }
+
+   # Customer 类
+   class Customer:
+       def __init__(self, customer_id, name, email):
+           self.customer_id = customer_id
+           self.name = name
+           self.email = email
+
+       def get_customer_info(self):
+           return {
+               'customer_id': self.customer_id,
+               'name': self.name,
+               'email': self.email
+           }
+
+       def update_customer_info(self, name, email):
+           self.name = name
+           self.email = email
+
+   # Inventory 类
+   class Inventory:
+       def __init__(self):
+           self.items = {}
+
+       def add_item(self, item_id, name, quantity, price):
+           self.items[item_id] = {'name': name, 'quantity': quantity, 'price': price}
+
+       def check_stock(self, item_id):
+           return self.items.get(item_id, {}).get('quantity', 0)
+
+       def update_stock(self, item_id, quantity):
+           if item_id in self.items:
+               self.items[item_id]['quantity'] += quantity
+
+   # PaymentProcessor 接口
+   class PaymentProcessor:
+       def process_payment(self, order_id, amount):
+           pass
+
+   # 实现 PaymentProcessor 接口的具体类
+   class CreditCardProcessor(PaymentProcessor):
+       def process_payment(self, order_id, amount):
+           # 信用卡支付处理逻辑
+           return f"Processed payment of {amount} for order {order_id} via Credit Card."
+
+   # 示例使用
+   order = Order(order_id='12345', customer_id='67890')
+   order.add_item(item_id='item1', quantity=2, price=100)
+   order.add_item(item_id='item2', quantity=1, price=200)
+
+   print(order.calculate_total())  # 输出：400
+   order.process_payment(payment_method='credit_card')
+
+   inventory = Inventory()
+   inventory.add_item(item_id='item1', name='Product 1', quantity=50, price=100)
+   print(inventory.check_stock(item_id='item1'))  # 输出：50
+
+   customer = Customer(customer_id='67890', name='John Doe', email='john.doe@example.com')
+   print(customer.get_customer_info())  # 输出客户信息
